@@ -1,0 +1,85 @@
+{
+  "name": "pdf-to-image-pdf",
+  "version": "1.2.0",
+  "description": "PDF-to-Image-PDF - Open source PDF processing tool for image conversion, extraction, and merging",
+  "license": "MIT",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "node scripts/build.js",
+    "dev": "npm run build && electron .",
+    "build:win": "npm run build && electron-builder --win",
+    "build:mac:x64": "npm run build && electron-builder --mac --x64",
+    "build:mac:arm64": "npm run build && electron-builder --mac --arm64",
+    "build:mac:universal": "npm run build && electron-builder --mac --universal"
+  },
+  "devDependencies": {
+    "electron": "^25.0.0",
+    "electron-builder": "^24.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.2",
+    "fontkit": "^2.0.4",
+    "jimp": "^1.6.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^2.16.105"
+  },
+  "build": {
+    "appId": "com.pdftoimagepdf.app",
+    "productName": "PDF-to-Image-PDF",
+    "copyright": "Copyright (C) 2026 PDF-to-Image-PDF",
+    "compression": "normal",
+    "asar": true,
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "dist/**/*",
+      "!node_modules/**/test/**/*",
+      "!node_modules/**/docs/**/*",
+      "!node_modules/**/examples/**/*",
+      "!node_modules/**/*.log",
+      "!node_modules/**/*.md",
+      "!node_modules/**/.bin/**/*",
+      "!node_modules/**/test/**/*",
+      "!node_modules/**/docs/**/*",
+      "!node_modules/**/examples/**/*",
+      "!node_modules/electron/**/*",
+      "!node_modules/electron-builder/**/*"
+    ],
+    "afterPack": "afterPack.cjs",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "publisherName": "PDF-to-Image-PDF"
+    },
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.utilities",
+      "appId": "com.pdftoolkit.app",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "entitlements.mac.plist",
+      "entitlementsInherit": "entitlements.mac.plist"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "PDF-to-Image-PDF",
+      "multiLanguageInstaller": true,
+      "installerLanguages": [
+        "en_US",
+        "zh_CN"
+      ]
+    }
+  }
+}
