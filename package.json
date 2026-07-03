@@ -11,7 +11,8 @@
     "build:win": "npm run build && electron-builder --win",
     "build:mac:x64": "npm run build && electron-builder --mac --x64",
     "build:mac:arm64": "npm run build && electron-builder --mac --arm64",
-    "build:mac:universal": "npm run build && electron-builder --mac --universal"
+    "build:mac:universal": "npm run build && electron-builder --mac --universal",
+    "build:linux": "npm run build && electron-builder --linux"
   },
   "devDependencies": {
     "electron": "^25.0.0",
@@ -68,6 +69,25 @@
       "gatekeeperAssess": false,
       "entitlements": "entitlements.mac.plist",
       "entitlementsInherit": "entitlements.mac.plist"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "appImage",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "tar.gz",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "Utility"
     },
     "nsis": {
       "oneClick": false,
