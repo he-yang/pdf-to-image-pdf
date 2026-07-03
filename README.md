@@ -91,7 +91,7 @@ Download the latest version from [GitHub Releases](https://github.com/he-yang/pd
 
 ### Prerequisites
 
-- Node.js >= 18.x
+- Node.js >= 20.x
 - npm >= 9.x
 
 ### Install Dependencies
