@@ -13,12 +13,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, macos-14, ubuntu-latest]
+        os: [windows-latest, macos-latest, ubuntu-latest]
         include:
           - os: windows-latest
             build-command: npm run build:win
             artifact-name: pdf-to-image-pdf-windows
-          - os: macos-14
+          - os: macos-latest
             build-command: npm run build:mac:universal
             artifact-name: pdf-to-image-pdf-macos
           - os: ubuntu-latest
