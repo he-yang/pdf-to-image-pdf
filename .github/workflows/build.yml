@@ -1,9 +1,9 @@
 name: Build and Package
 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
   release:
     types:
       - created
@@ -51,11 +51,11 @@ jobs:
         with:
           name: ${{ matrix.artifact-name }}
           path: |
-            dist-electron/**/*.exe
-            dist-electron/**/*.dmg
-            dist-electron/**/*.appimage
-            dist-electron/**/*.tar.gz
-            dist-electron/**/*.zip
+            dist-electron/*.exe
+            dist-electron/*.dmg
+            dist-electron/*.appimage
+            dist-electron/*.tar.gz
+            dist-electron/*.zip
           retention-days: 7
 
       - name: Upload to release
@@ -63,10 +63,10 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist-electron/**/*.exe
-            dist-electron/**/*.dmg
-            dist-electron/**/*.appimage
-            dist-electron/**/*.tar.gz
-            dist-electron/**/*.zip
+            dist-electron/*.exe
+            dist-electron/*.dmg
+            dist-electron/*.appimage
+            dist-electron/*.tar.gz
+            dist-electron/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

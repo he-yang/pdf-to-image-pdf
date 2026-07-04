@@ -1,6 +1,6 @@
 {
   "name": "pdf-to-image-pdf",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "PDF-to-Image-PDF - Open source PDF processing tool for image conversion, extraction, and merging",
   "license": "MIT",
   "main": "main.js",
