@@ -60,7 +60,8 @@
           ]
         }
       ],
-      "publisherName": "PDF-to-Image-PDF"
+      "publisherName": "PDF-to-Image-PDF",
+      "sign": false
     },
     "mac": {
       "target": "dmg",
