@@ -58,9 +58,9 @@ Download the latest version from [GitHub Releases](https://github.com/he-yang/pd
 
 ### Supported Platforms
 
-- **Windows**: `.exe` installer (32-bit and 64-bit)
+- **Windows**: `.exe` installer (x64)
 - **macOS**: `.dmg` installer (Intel and Apple Silicon)
-- **Linux**: `.appImage` portable file
+- **Linux**: `.appImage` portable file, `tar.gz` archive
 
 ---
 
@@ -87,96 +87,6 @@ Download the latest version from [GitHub Releases](https://github.com/he-yang/pd
 
 ---
 
-## 🛠️ Development
-
-### Prerequisites
-
-- Node.js >= 20.x
-- npm >= 9.x
-
-### Install Dependencies
-
-```bash
-npm install
-```
-
-### Development Mode
-
-```bash
-# Build the project
-npm run build
-
-# Start the application
-npm run dev
-```
-
-### Project Structure
-
-```
-pdf-to-image-pdf/
-├── src/                    # Source files
-│   ├── index.html          # Main HTML file
-│   ├── css/                # CSS styles
-│   └── js/                 # JavaScript files
-│       ├── main.js         # Entry point (ES module)
-│       ├── app.js          # Application logic
-│       └── i18n.js         # Internationalization
-├── main.js                 # Electron main process
-├── preload.js              # Preload script
-├── scripts/
-│   └── build.js            # Build script (replaces webpack)
-├── dist/                   # Build output
-└── package.json            # Project configuration
-```
-
----
-
-## 📦 Build & Package
-
-### Build for Development
-
-```bash
-npm run build
-```
-
-### Build for Production
-
-#### Windows
-
-```bash
-npm run build:win
-```
-
-#### macOS
-
-```bash
-# Build for Intel (x64)
-npm run build:mac:x64
-
-# Build for Apple Silicon (arm64)
-npm run build:mac:arm64
-
-# Build Universal binary (both architectures)
-npm run build:mac:universal
-```
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Commit your changes: `git commit -m 'Add some feature'`
-4. Push to the branch: `git push origin feature/your-feature`
-5. Create a Pull Request
-
-### Code Style
-
-- Use ES6+ syntax
-- Follow Standard JS style
-- Clear and descriptive commit messages
-
----
 
 ## 📄 License
 

@@ -41,9 +41,9 @@
 
 ### 支持平台
 
-- **Windows**: `.exe` 安装包（支持 32 位和 64 位）
+- **Windows**: `.exe` 安装包（支持 x64）
 - **MacOS**: `.dmg` 安装包（支持 Intel 和 Apple Silicon）
-- **Linux**: `.appImage` 运行文件
+- **Linux**: `.appImage` 运行文件，`tar.gz` 归档（支持 x64 和 arm64 架构）
 
 ---
 

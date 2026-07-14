@@ -17,7 +17,7 @@ jobs:
           - os: windows-latest
             build-command: npm run build:win
             os-name: windows
-            arch: x64-ia32
+            arch: x64
           - os: macos-latest
             build-command: npm run build:mac:x64
             os-name: macos
@@ -62,7 +62,11 @@ jobs:
         with:
           name: pdf-to-image-pdf-${{ matrix.os-name }}-${{ matrix.arch }}-${{ steps.get_version.outputs.version }}
           path: |
-            dist-electron/**/*
+            dist-electron/*.dmg
+            dist-electron/*.exe
+            dist-electron/*.appimage
+            dist-electron/*.zip
+            dist-electron/*.tar.gz
           retention-days: 7
 
   upload-release:
