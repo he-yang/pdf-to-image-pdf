@@ -13,17 +13,20 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, macos-14, ubuntu-latest]
+        os: [windows-latest, macos-latest, ubuntu-latest]
         include:
           - os: windows-latest
             build-command: npm run build:win
-            artifact-name: pdf-to-image-pdf-windows
-          - os: macos-14
-            build-command: npm run build:mac:universal
-            artifact-name: pdf-to-image-pdf-macos
+            os-name: windows
+            arch: x64-ia32
+          - os: macos-latest
+            build-command: npm run build:mac:x64 && npm run build:mac:arm64
+            os-name: macos
+            arch: x64-arm64
           - os: ubuntu-latest
             build-command: npm run build:linux
-            artifact-name: pdf-to-image-pdf-linux
+            os-name: linux
+            arch: x64-arm64
 
     steps:
       - name: Checkout code
@@ -37,36 +40,49 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Get version from package.json
+        id: get_version
+        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
       - name: Build
         run: ${{ matrix.build-command }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: List dist-electron contents
-        run: ls -la dist-electron/
+      - name: List all files
+        run: find . -name "*.exe" -o -name "*.dmg" -o -name "*.appimage" -o -name "*.tar.gz" -o -name "*.zip" 2>/dev/null || dir /s /b *.exe *.dmg *.appimage *.tar.gz *.zip 2>NUL
         shell: bash
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.artifact-name }}
+          name: pdf-to-image-pdf-${{ matrix.os-name }}-${{ matrix.arch }}-${{ steps.get_version.outputs.version }}
           path: |
-            dist-electron/*.exe
-            dist-electron/*.dmg
-            dist-electron/*.appimage
-            dist-electron/*.tar.gz
-            dist-electron/*.zip
+            **/*.exe
+            **/*.dmg
+            **/*.appimage
+            **/*.tar.gz
+            **/*.zip
           retention-days: 7
 
+  upload-release:
+    needs: build
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          merge-multiple: true
+
+      - name: List downloaded files
+        run: ls -la artifacts/
+        shell: bash
+
       - name: Upload to release
-        if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            dist-electron/*.exe
-            dist-electron/*.dmg
-            dist-electron/*.appimage
-            dist-electron/*.tar.gz
-            dist-electron/*.zip
+          files: artifacts/**/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
